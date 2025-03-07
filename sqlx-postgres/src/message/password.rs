@@ -1,5 +1,6 @@
 use crate::io::BufMutExt;
 use crate::message::{FrontendMessage, FrontendMessageFormat};
+use base16ct::HexDisplay;
 use md5::{Digest, Md5};
 use sqlx_core::Error;
 use std::fmt::Write;
@@ -67,14 +68,14 @@ impl FrontendMessage for Password<'_> {
 
                 let mut output = String::with_capacity(35);
 
-                let _ = write!(output, "{:x}", hasher.finalize_reset());
+                let _ = write!(output, "{:x}", HexDisplay(&hasher.finalize_reset()));
 
                 hasher.update(&output);
                 hasher.update(salt);
 
                 output.clear();
 
-                let _ = write!(output, "md5{:x}", hasher.finalize());
+                let _ = write!(output, "md5{:x}", HexDisplay(&hasher.finalize()));
 
                 buf.put_str_nul(&output);
             }
