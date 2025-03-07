@@ -187,8 +187,8 @@ paste = "1.0.6"
 serde = { version = "1.0.132", features = ["derive"] }
 serde_json = "1.0.73"
 url = "2.2.2"
-rand = "0.8.4"
-rand_xoshiro = "0.6.0"
+rand = "0.9"
+rand_xoshiro = "0.7.0"
 hex = "0.4.3"
 tempfile = "3.10.1"
 criterion = { version = "0.5.1", features = ["async_tokio"] }
@@ -405,3 +405,23 @@ required-features = ["postgres"]
 name = "postgres-rustsec"
 path = "tests/postgres/rustsec.rs"
 required-features = ["postgres", "macros", "migrate"]
+
+[patch.crates-io]
+# https://github.com/RustCrypto/traits/pull/1719
+crypto-common  = { git = "https://github.com/baloo/traits.git", branch = "baloo/digest-newtype-master" }
+digest         = { git = "https://github.com/baloo/traits.git", branch = "baloo/digest-newtype-master" }
+signature      = { git = "https://github.com/baloo/traits.git", branch = "baloo/digest-newtype-master" }
+
+der        = { git = "https://github.com/RustCrypto/formats.git" }
+pkcs1      = { git = "https://github.com/RustCrypto/formats.git" }
+pkcs8      = { git = "https://github.com/RustCrypto/formats.git" }
+
+rsa = { git = "https://github.com/baloo/RSA.git", branch = "baloo/digest/newtype" }
+
+md-5         = { git = "https://github.com/RustCrypto/hashes.git", branch = "newtype" }
+sha1         = { git = "https://github.com/RustCrypto/hashes.git", branch = "newtype" }
+sha2         = { git = "https://github.com/RustCrypto/hashes.git", branch = "newtype" }
+
+crypto-primes = { git = "https://github.com/entropyxyz/crypto-primes.git" }
+
+hmac = { git = "https://github.com/baloo/MACs.git", branch = "baloo/digest-pin" }
